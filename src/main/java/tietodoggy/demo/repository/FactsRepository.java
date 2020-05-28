@@ -1,7 +1,12 @@
 package tietodoggy.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import tietodoggy.demo.entity.Facts;
+import org.springframework.data.jpa.repository.Query;
+import tietodoggy.demo.entity.Fact;
 
-public interface FactsRepository extends JpaRepository<Facts, Long> {
+import java.util.List;
+
+public interface FactsRepository extends JpaRepository<Fact, Long> {
+    @Query("select f from Fact f where f.isDeleted=false")
+    public List<Fact> findAll();
 }
